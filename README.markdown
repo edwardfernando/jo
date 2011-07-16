@@ -41,9 +41,9 @@ Currently you can install it as a plugin. It only supports Rails.
 > <b>Rule of thumb:</b>
 
 1. Create MySQL columns and index them in MySQL for all fields you want to search.
-2. Put all other fields into Jo model.
+2. Put all other fields into one or many MySQL text columns by marshaling into a JSON string.
 
-> <b>Note:</b> The MySQL column that links to Jo model should be a text column.
+> <b>Note:</b> The MySQL column to store JSON should be a text column, or even better mediumtext.
 
 > <b>Note:</b> Do not forget to turn on UTF-8 in both MySQL and Ruby if you want to store multi-language information.
 
