@@ -1,6 +1,5 @@
 # JoSQL = NoSQL in MySQL
 
-# JoSQL = NoSQL in MySQL
 > <b>Jo</b> stands for <b>JSON object</b>.
 
 This library helps to organize NoSQL data (to be correct: JSON string) into MySQL columns.
