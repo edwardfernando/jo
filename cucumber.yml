@@ -1,0 +1,1 @@
+default: "--format pretty --require features/support/env.rb --require features/step_definitions/active_record_steps.rb"
