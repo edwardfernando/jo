@@ -26,7 +26,7 @@ This library helps to organize NoSQL data (to be correct: JSON string) into MySQ
 * When you decide to index 1 column it would be very slow. You need to transfer data from Jo field to normal MySQL field (again, database design is very important).
 * Your JSON string can be larger than the size of MySQL column, resulting in a truncated string and loss of data.
 
-> <b>Note:</b> This library is inspired by [[FriendlyORM|http://friendlyorm.com/]]. You can read more about the motives of building this kind of library from that page.
+> <b>Note:</b> This library is inspired by http://friendlyorm.com/.
 
 # 1. Install
 
