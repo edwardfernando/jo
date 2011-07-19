@@ -31,10 +31,10 @@ This library helps to organize NoSQL data (to be correct: JSON string) into MySQ
 
 # 1. Install
 
-Currently you can install it as a plugin. It only supports Rails.
+Install in your Gemfile, the quick and dirty way.
 
 ```sh
-./script/plugin install git://github.com/phungleson/jo.git
+gem 'jo', :git => 'git://github.com/phungleson/jo.git', :ref => 'bc8eddd73c1177f88206', :require => 'jo'
 ```
 
 # 2. Basics
