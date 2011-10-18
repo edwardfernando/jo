@@ -22,6 +22,12 @@ module Jo
       self.delete_if { |key, value| value != false && value.blank? }
     end
 
+    def merge!(objects)
+      objects.each do |key, object|
+        self[key] = object
+      end
+    end
+
     def []=(key, object)
       if binded?
         type_casted_object = type_cast_object(object)
