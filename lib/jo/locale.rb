@@ -34,7 +34,7 @@ module Jo
       end
     end
 
-    def self.set_locales(locales)
+    def self.set_locales(*locales)
       @locales = locales
     end
 
