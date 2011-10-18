@@ -3,6 +3,15 @@ module Jo
     extend ActiveSupport::Concern
 
     module ClassMethods
+      def self.set_locales(locales)
+        @locales = locales
+      end
+
+
+      def self.locales
+        @locales ||= [:en, :'zh-cn']
+      end
+
 
       def jo_locale_accessor(name)
         define_method("#{name}_i18n") do
@@ -34,11 +43,6 @@ module Jo
         end
       end
 
-    end
-
-
-    def self.locales
-      @locales ||= [:en, :de, :es, :fr, :id, :it, :ja, :ko, :ru, :th, :vi, :'zh-cn', :'zh-tw']
     end
 
 
