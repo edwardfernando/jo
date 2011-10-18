@@ -3,16 +3,6 @@ module Jo
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def self.set_locales(locales)
-        @locales = locales
-      end
-
-
-      def self.locales
-        @locales ||= [:en, :'zh-cn']
-      end
-
-
       def jo_locale_accessor(name)
         define_method("#{name}_i18n") do
           locale = defined?(I18n) ? I18n.locale.to_sym : :en
@@ -42,9 +32,16 @@ module Jo
           aliases.each { |a| alias_method Jo::Locale.localize(name, a), locale }
         end
       end
-
     end
 
+    def self.set_locales(locales)
+      @locales = locales
+    end
+
+
+    def self.locales
+      @locales ||= [:en, :'zh-cn']
+    end
 
     def self.underscored_locales
       @underscored_locales ||= locales.collect{ |locale| underscore(locale) }
