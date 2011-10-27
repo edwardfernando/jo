@@ -1,2 +1,3 @@
 vendor/ruby
+Gemfile.lock
 .bundle
