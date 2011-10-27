@@ -9,9 +9,13 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Phung Le Son"]
-  s.date = %q{2011-04-14}
+  s.date = %q{2011-10-27}
   s.description = %q{A concise and easy-to-use Ruby library to put json data into SQL column.}
   s.email = %q{leson.phung@gmail.com}
+  s.extra_rdoc_files = [
+    "LICENSE",
+    "README.markdown"
+  ]
   s.files = [
     "lib/jo.rb",
     "lib/jo/active_record.rb",
@@ -30,7 +34,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://twitter.com/phungleson}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.4.2}
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{ActiveRecord/Rails Jo library}
 
   if s.respond_to? :specification_version then
