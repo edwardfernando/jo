@@ -132,8 +132,7 @@ module Jo
         attribute_meta = meta.attributes[name] = Jo::Meta.new(options)
 
         # To register new attributes for ActiveModel to track changes.
-        undefine_attribute_methods if attribute_methods_generated?
-        define_attribute_methods meta.attributes.keys
+        define_attribute_method name
 
         validate_jo_family(name, attribute_meta) if attribute_meta.jo_family?
 
