@@ -40,7 +40,7 @@ module Jo
 
 
     def self.locales
-      @locales ||= [:en, :'zh-cn']
+      @locales ||= [:en, :'zh-tw']
     end
 
     def self.underscored_locales
