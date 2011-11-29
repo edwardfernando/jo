@@ -27,6 +27,7 @@ module Jo
         validates_inclusion_of attrs, :in => [true, false]
       end
 
+
       def validate_jo_family(name, meta)
         class_eval do
           validate "validate_#{name}"
@@ -34,14 +35,13 @@ module Jo
           define_method("validate_#{name}") do
             object = send(name)
 
-            if object.present?
-              self.errors.merge!(object.errors) if meta.base? && object.invalid?
+            return if object.blank?
 
-              if (meta.array? || meta.hash?) && meta.object_base?
-                object.each_value { |value| self.errors.merge!(value.errors) if value.invalid? }
-              end
+            meta.base? && object.invalid? && object.errors.each { |attribute, error| self.errors[attribute] = error }
+
+            (meta.array? || meta.hash?) && meta.object_base? && object.each_value do |value|
+              value.invalid? && value.errors.each { |attribute, error| self.errors[attribute] = error }
             end
-
           end
         end
       end
