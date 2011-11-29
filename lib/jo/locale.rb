@@ -35,6 +35,7 @@ module Jo
     end
 
     def self.set_locales(*locales)
+      @underscored_locales = nil
       @locales = locales
     end
 
@@ -43,8 +44,15 @@ module Jo
       @locales ||= [:en, :'zh-tw']
     end
 
+
     def self.underscored_locales
       @underscored_locales ||= locales.collect{ |locale| underscore(locale) }
+    end
+
+
+    def self.set_aliases(aliases)
+      @supported_aliases = nil
+      @aliases = aliases
     end
 
 
