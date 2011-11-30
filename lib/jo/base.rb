@@ -52,6 +52,10 @@ module Jo
       @attributes.present?
     end
 
+    def blank?
+      @attributes.blank?
+    end
+
     def each
       @attributes.each { |key, value| yield(key, value) }
     end
