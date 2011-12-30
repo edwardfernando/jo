@@ -12,6 +12,13 @@ module Jo
           send("#{name}_#{Jo::Locale.underscore(locale)}") || send("#{name}_en")
         end
 
+        define_method("#{name}_locale") do |locale|
+          locale = :en unless Jo::Locale.support?(locale)
+
+          # Fallback to English.
+          send("#{name}_#{Jo::Locale.underscore(locale)}") || send("#{name}_en")
+        end
+
         # Accessors for each locale.
         Jo::Locale.locales.each do |locale|
           name_locale = Jo::Locale.localize(name, locale)
