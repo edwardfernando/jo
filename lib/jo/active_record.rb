@@ -61,7 +61,7 @@ module Jo
         options[:name] = name
         options[:class] ||= clazz
 
-        alias_name = options[:alias]
+        alias_name = options[:alias] || options[:as]
 
         attribute_meta = meta.attributes[name]
 
@@ -176,7 +176,7 @@ module Jo
       def jonize_i18n(name, options = {})
         options[:object_class] ||= :string
         jonize(name, Jo::Hash, options)
-        alias_name = options[:alias]
+        alias_name = options[:alias] || options[:as]
 
         class_eval do
           jo_locale_accessor name
