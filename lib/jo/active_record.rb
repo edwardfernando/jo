@@ -77,6 +77,8 @@ module Jo
 
           instance = "@#{name}"
           instance_before_type_cast = "@#{name}_before_type_cast"
+          instance_will_change = "#{name}_will_change!"
+          instance_changed = "#{name}_changed?"
 
           class_eval do
             validate_jo_family(name, attribute_meta)
@@ -97,7 +99,7 @@ module Jo
               type_casted_object = Jo::Helper.type_cast(object, attribute_meta)
 
               if type_casted_object != send(name)
-                send("#{name}_will_change!")
+                respond_to?(instance_will_change) && send(instance_will_change)
 
                 type_casted_object = Jo::Helper.bind(type_casted_object, attribute_meta, self, name)
 
@@ -127,7 +129,9 @@ module Jo
             end
 
             # Write the jo to column before save if there are changes.
-            before_save :if => "#{name}_changed?" do |model|
+            before_save :if => Proc.new { |model|
+              model.respond_to?(instance_changed) && model.send(instance_changed)
+            } do |model|
               object = send(name)
 
               if attribute_meta.polymorphism?
@@ -143,7 +147,9 @@ module Jo
               true
             end
 
-            after_save :if => "#{name}_changed?" do |model|
+            after_save :if => Proc.new {
+              model.respond_to?(instance_changed) && model.send(instance_changed)
+            } do |model|
               object = send(name)
 
               if object
