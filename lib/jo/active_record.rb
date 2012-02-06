@@ -147,7 +147,7 @@ module Jo
               true
             end
 
-            after_save :if => Proc.new {
+            after_save :if => Proc.new { |model|
               model.respond_to?(instance_changed) && model.send(instance_changed)
             } do |model|
               object = send(name)
