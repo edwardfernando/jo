@@ -1,7 +1,7 @@
 module Jo
   class FastBase
     [:id, :type].each do |method|
-      undef_method method
+      undef_method(method) if respond_to?(method)
     end
 
     def initialize(objects = {})
