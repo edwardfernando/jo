@@ -7,6 +7,7 @@ require 'jo/validations'
 require 'jo/polymorphism'
 
 require 'jo/base'
+require 'jo/fast_base'
 require 'jo/array'
 require 'jo/hash'
 
