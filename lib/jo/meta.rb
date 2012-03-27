@@ -22,66 +22,100 @@ module Jo
       @default.clone rescue @default
     end
 
-    [:date, :time, :integer, :float, :boolean, :string].each do |type|
-      define_method("#{type}?") do
-        eval("@#{type}") || instance_variable_set("@#{type}", @class == type)
-      end
+    def date?
+      @date.nil? ? (@date = @class == :date) : @date
+    end
 
-      define_method("object_#{type}?") do
-        eval("@object_#{type}") || instance_variable_set("@object_#{type}", @object_class == type)
-      end
+    def object_date?
+      @object_date.nil? ? (@object_date = @object_class == :date) : @object_date
+    end
+
+    def time?
+      @time.nil? ? (@time = @class == :time) : @time
+    end
+
+    def object_time?
+      @object_time.nil? ? (@object_time = @object_class == :time) : @object_time
+    end
+
+    def integer?
+      @integer.nil? ? (@integer = @class == :integer) : @integer
+    end
+
+    def object_integer?
+      @object_integer.nil? ? (@object_integer = @object_class == :integer) : @object_integer
+    end
+
+    def float?
+      @float.nil? ? (@float = @class == :float) : @float
+    end
+
+    def object_float?
+      @object_float.nil? ? (@object_float = @object_class == :float) : @object_float
+    end
+
+    def boolean?
+      @boolean.nil? ? (@boolean = @class == :boolean) : @boolean
+    end
+
+    def object_boolean?
+      @object_boolean.nil? ? (@object_boolean = @object_class == :boolean) : @object_boolean
+    end
+
+    def string?
+      @string.nil? ? (@string = @class == :string) : @string
+    end
+
+    def object_string?
+      @object_string.nil? ? (@object_string = @object_class == :string) : @object_string
     end
 
     def jo_family?
-      @jo_family ||= base? || array? || hash?
+      @jo_family.nil? ? (@jo_family = base? || array? || hash?) : @jo_family
     end
 
     def object_jo_family?
-      @object_jo_family ||= object_base? || object_array? || object_hash?
+      @object_jo_family.nil? ? (@object_jo_family = object_base? || object_array? || object_hash?) : @object_jo_family
     end
 
-    [:base, :array, :hash].each do |type|
-      define_method("#{type}?") do
-        value = eval("@#{type}")
-        unless value
-          value = if @class.is_a?(Symbol) || @class.nil?
-            false
-          else
-            eval("#{@class} <= Jo::#{type.to_s.classify}")
-          end
-          instance_variable_set("@#{type}", value)
-        end
-        value
-      end
+    def base?
+      @base.nil? ? (@base = @class.ancestors.include?(Jo::Base) || @class.ancestors.include?(Jo::FastBase)) : @base
+    end
 
-      define_method("object_#{type}?") do
-        value = eval("@object_#{type}")
-        unless value
-          value = if @object_class.is_a?(Symbol) || @object_class.nil?
-            false
-          else
-            eval("#{@object_class} <= Jo::#{type.to_s.classify}")
-          end
-          instance_variable_set("@object_#{type}", value)
-        end
-        value
-      end
+    def object_base?
+      @object_base.nil? ? (@object_base = @object_class.ancestors.include?(Jo::Base) || @object_class.ancestors.include?(Jo::FastBase)) : @object_base
+    end
+
+    def array?
+      @array.nil? ? (@array = @class.ancestors.include?(Jo::Array)) : @array
+    end
+
+    def object_array?
+      @object_array.nil? ? (@object_array = @object_class.ancestors.include?(Jo::Array)) : @object_array
+    end
+
+    def hash?
+      @hash.nil? ? (@hash = @class.ancestors.include?(Jo::Hash)) : @hash
+    end
+
+    def object_hash?
+      @object_hash.nil? ? (@object_hash = @object_class.ancestors.include?(Jo::Hash)) : @object_hash
     end
 
     def dirty?
-      @jorty ||= @class.include?(Jo::Dirty)
-    end
-
-    def polymorphism?
-      @jo ||= @class.include?(Jo::Polymorphism)
+      @dirty.nil? ? (@dirty = @class.include?(Jo::Dirty)) : @dirty
     end
 
     def object_dirty?
-      @object_dirty ||= @objet_class && @objet_class.include?(Jo::Dirty)
+      @object_dirty.nil? ? (@object_dirty = @object_class.include?(Jo::Dirty)) : @object_dirty
+    end
+
+    def polymorphism?
+      @polymorphism.nil? ? (@polymorphism = @class.include?(Jo::Polymorphism)) : @polymorphism
     end
 
     def object_polymorphism?
-      @object_polymorphism ||= @object_class && @object_class.include?(Jo::Polymorphism)
+      @object_polymorphism.nil? ? (@object_polymorphism = @object_class.include?(Jo::Polymorphism)) : @object_polymorphism
     end
 
   end
