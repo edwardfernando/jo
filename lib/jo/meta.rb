@@ -31,7 +31,7 @@ module Jo
     end
 
     def class?
-      @is_class.nil? ? (@is_class = @class.is_a?(Class)) : @is_symbol
+      @is_class.nil? ? (@is_class = @class.is_a?(Class)) : @is_class
     end
 
     def object_class?
