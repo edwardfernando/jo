@@ -8,7 +8,7 @@ module Jo
       @attributes = objects
     end
 
-    def method_missing(method)
+    def method_missing(method, *params, &block)
       @attributes[method]
     end
   end
