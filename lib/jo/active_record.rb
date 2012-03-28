@@ -53,6 +53,23 @@ module Jo
       end
 
       # Turn an AR column to a jo
+      # Column name and the Jo::FastBase to parse json for that column
+      def jonize_fast(name, clazz, options = {})
+        instance = "@#{name}"
+
+        class_eval do
+          define_method(name) do
+            return instance_variable_get(instance) if instance_variable_defined?(instance)
+
+            object = read_attribute(name)
+            object = nil if object.is_a?(String) && object.blank?
+            object = object ? JSON::parse(object) : {}
+            instance_variable_set(instance, clazz.new(object))
+          end
+        end
+      end
+
+      # Turn an AR column to a jo
       # Column name and the jo class to parse json for that column
       def jonize(name, clazz, options = {})
         name = name.to_sym
