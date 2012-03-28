@@ -57,6 +57,8 @@ module Jo
       def jonize_fast(name, clazz, options = {})
         instance = "@#{name}"
 
+        alias_name = options[:as]
+
         class_eval do
           define_method(name) do
             return instance_variable_get(instance) if instance_variable_defined?(instance)
@@ -66,6 +68,8 @@ module Jo
             object = object ? JSON::parse(object) : {}
             instance_variable_set(instance, clazz.new(object))
           end
+
+          alias_method alias_name, name if alias_name && alias_name != name
         end
       end
 
