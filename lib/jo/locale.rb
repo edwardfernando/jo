@@ -13,7 +13,7 @@ module Jo
         end
 
         # Accessors for each locale.
-        Jo::Locale.underscored_locales.each do |locale|
+        Jo::Locale.locales.each do |locale|
           name_locale = Jo::Locale.localize(name, locale)
 
           define_method(name_locale) do
